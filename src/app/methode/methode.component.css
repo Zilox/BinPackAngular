@@ -1,0 +1,184 @@
+select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.balloon {
+    display: inline-block;
+    width: 215px;
+    padding: 10px 0 10px 95px;
+    font-family: "Open Sans", sans;
+    font-weight: 400;
+    color: #377D6A;
+    background: #efefef;
+    border: 0;
+    border-radius: 3px;
+    outline: 0;
+    text-indent: 60px;
+    transition: all .3s ease-in-out;
+  }
+  .balloon::-webkit-input-placeholder {
+    color: #efefef;
+    text-indent: 0;
+    font-weight: 300;
+  }
+  .balloon + label {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    bottom: 8px;
+    padding: 5px 15px;
+    color: #032429;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0);
+    transition: all .3s ease-in-out;
+    border-radius: 3px;
+    background: rgba(122, 184, 147, 0);
+  }
+  .balloon + label:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: 100%;
+    left: 50%;
+    margin-left: -3px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 3px solid rgba(122, 184, 147, 0);
+    transition: all .3s ease-in-out;
+  }
+  
+  .balloon:focus,
+  .balloon:active {
+    color: #377D6A;
+    text-indent: 0;
+    background: #fff;
+  }
+  .balloon:focus::-webkit-input-placeholder,
+  .balloon:active::-webkit-input-placeholder {
+    color: #aaa;
+  }
+  .balloon:focus + label,
+  .balloon:active + label {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
+    background: #6c757d;
+    transform: translateY(-40px);
+  }
+  .balloon:focus + label:after,
+  .balloon:active + label:after {
+    border-top: 4px solid #6c757d;
+  }
+
+  .row {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .row:before {
+    position: absolute;
+    display: block;
+    z-index: -1;
+    background: inherit;
+  }
+  .row:first-child {
+    padding: 40px 30px;
+  }
+  
+  .row span {
+    position: relative;
+    display: inline-block;
+    margin: 30px 10px;
+  }
+
+  .section {
+    margin-left: 15px;
+    background: #fff;
+    padding: 7px 10px;
+    margin-top: 10px;
+}
+
+button {
+  width: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+label {
+  font: bold;
+}
+
+body, html {
+  background: #efefef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  z-index: -1;
+}
+.btn {
+  border: 3px solid #100506;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  transition: background 600ms ease, color 600ms ease;
+}
+
+input[type="radio"].toggle {
+  display: none;
+}
+input[type="radio"].toggle + label {
+  cursor: pointer;
+  min-width: 60px;
+}
+input[type="radio"].toggle + label:hover {
+  background: none;
+  color: #1a1a1a;
+}
+input[type="radio"].toggle + label:after {
+  background: #28a745;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+  width: 100%;
+  z-index: -1;
+}
+input[type="radio"].toggle.toggle-left + label {
+  border-right: 0;
+}
+input[type="radio"].toggle.toggle-left + label:after {
+  left: 100%;
+}
+input[type="radio"].toggle.toggle-right + label {
+  margin-left: -5px;
+}
+input[type="radio"].toggle.toggle-right + label:after {
+  left: -100%;
+}
+input[type="radio"].toggle:checked + label {
+  cursor: default;
+  color: #fff;
+  transition: color 200ms;
+}
+input[type="radio"].toggle:checked + label:after {
+  left: 0;
+}
+
+.container-toggle {
+  text-align: center;
+  margin-top: 10px;
+}
+
+tbody {
+  height: 100px;       /* Just for the demo          */
+  overflow-y: auto;    /* Trigger vertical scroll    */
+  overflow-x: hidden;  /* Hide the horizontal scroll */
+}

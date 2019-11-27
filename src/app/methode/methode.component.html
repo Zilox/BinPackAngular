@@ -1,0 +1,137 @@
+<div class="container-toggle">
+
+<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" (click)="ChangeMenu(true)" checked>
+<label for="toggle-on" class="btn">Entrée Manuelle</label>
+<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio" (click)="ChangeMenu(false)">
+<label for="toggle-off" class="btn">Entrée Automa. </label>
+</div>
+
+<div class="container">
+  
+  <!-- <div class="section">
+    <div class="titre">
+        <H2> Choix de méthode</H2>
+        <select [(ngModel)]="methodSelected">
+            <option *ngFor="let method of Methods">{{method | methodeName}}</option>
+        </select>
+        
+        <div class="row offset-3">
+          <span>
+            <input [(ngModel)]="alpha" type="number" class="balloon" id="galaxy" type="text" placeholder="Alpha" /><label for="Alpha">Alpha</label>
+          </span>
+
+          <span>
+            <input  [(ngModel)]="nbObjet" type="number" class="balloon" id="galaxy" type="text" placeholder="N" /><label for="Nombre_objet">Nombre d'objet</label>
+          </span>
+
+          <span>
+              <input  [(ngModel)]="result.b" type="number" class="balloon" id="galaxy" type="text" placeholder="B" /><label for="Valeur max">Max dans le sac</label>
+            </span>
+        </div>
+        
+    </div>
+  </div> -->
+
+  <!-- <div class="section">
+      <button type="button" class="btn btn-primary" (click)="CalculMethod()">
+          Simuler
+        </button>
+
+        <span><label>Temps d'éxecution :</label><p>{{result.timer}}</p></span>
+        <span><label>Cout :</label><p>{{result.cout}}</p></span>
+        <span><label>Borne inférieur :</label><p>{{result.bi}}</p></span>
+        <span><label>Borner supérieur :</label><p>{{result.bs}}</p></span>
+        <span *ngIf="result.result" ><label>Liste solution :</label>
+          <ul>
+            <li   *ngFor="let item of result.result;">N° d'objet{{item}}</li>
+          </ul> 
+        </span>
+
+  </div> -->
+
+
+ 
+  <div class="row" *ngIf="ModeManuelle">
+      
+      <div class="section col-5">
+        <h2>Ajout Objet</h2>
+      <span>
+        <input  [(ngModel)]="poidsTempo" type="number" class="balloon" id="galaxy" type="text" placeholder="Poids" /><label for="Valeur max">Poids objet</label>
+      </span>
+      <span>
+        <input  [(ngModel)]="couleurTempo" type="number" class="balloon" id="galaxy" type="text" placeholder="Couleur" /><label for="Valeur max">Couleur objet</label>
+      </span>
+  
+      <button (click)="Add()" class="btn btn-success">Ajouter</button>
+    </div>
+  
+    <div class="section col-5">
+        <h2>Ajout Sacs</h2>
+      <span>
+        <input  [(ngModel)]="capaciteTempo" type="number" class="balloon" id="galaxy" type="text" placeholder="Capacite" /><label for="Valeur max">Capacité du sac</label>
+      </span>
+  
+      <button (click)="AddSac()" class="btn btn-success">Ajouter</button>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="!ModeManuelle">
+    <div class="section col-11">
+        <h2>Choix Fichier</h2>
+        <button (click)="SelectionneUnFichier()" class="btn btn-dark">{{LabelBouton}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="section col-5">
+      <div class="titre">
+          <H2> Tableau des Objets</H2>
+      </div>
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <th>Numéro d'objet</th>
+              <th>Poids de l'objet </th>
+              <th>Valeur de l'objet </th>
+            </thead>
+            <tbody>
+              
+              <tr *ngFor="let item of ListeObjet">
+                <td>{{item.IdObjet}}</td>
+                <td>{{item.Poids}}</td>
+                <td>{{item.Couleur}}</td>
+                <td><button class="btn-danger" (click)="Delete(item.IdObjet)">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        
+      </div>
+    </div>
+      <div class="section col-5">
+          <div class="titre">
+              <H2> Tableau des sacs</H2>
+          </div>
+            <div class="table-responsive table-striped">
+              <table class="table">
+                <thead>
+                  <th>Numéro d'objet</th>
+                  <th>Capacité du sac </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of ListeBoite">
+                    <td>{{item.IdBoite}}</td>
+                    <td>{{item.Capacite}}</td>
+                    <td><button class="btn-danger" (click)="DeleteSac(item.IdBoite)">Delete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            
+          </div>
+
+      
+    </div>
+
+</div>
+
