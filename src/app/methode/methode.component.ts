@@ -7,6 +7,10 @@ import { Objet } from '../Model/Objet';
 import { DonneesEnEntree } from '../Model/DonnesEnEntree';
 import { Resultat } from '../Model/Resultat';
 import { Boite } from '../Model/Boite';
+import { TdFileService } from '@covalent/core/file';
+
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-methode',
@@ -17,6 +21,9 @@ export class MethodeComponent implements OnInit {
 
   // Affichage dynamique
   ModeManuelle: boolean;
+  StringPage: string;
+  PageEntree = true;
+  PageSortie = false;
 
   // Valeur temporaire des entrées
   nbObjet: number;
@@ -25,8 +32,8 @@ export class MethodeComponent implements OnInit {
   ListeBoite: Array<Boite>;
   ListeTempoBoite: Array<Boite>;
 
-  // Valeur temporaire des sorties
-  resultat: Resultat;
+  file: File;
+
 
   // ===================================================
   // Valeur des input
@@ -42,10 +49,9 @@ export class MethodeComponent implements OnInit {
   // Valeur des combobox
 
   LabelBouton = 'Chercher un fichier';
-  Methods = [0];
-  methodSelected: string;
 
-  constructor(private service: PostService) { }
+
+  constructor(private service: PostService, private fileUploadService: TdFileService, private http: HttpClient ) { }
 
   ngOnInit() {
     this.ListeObjet = new Array<Objet>();
@@ -55,6 +61,7 @@ export class MethodeComponent implements OnInit {
     this.ListeTempoBoite = new Array<Boite>();
 
     this.ModeManuelle = true;
+    this.StringPage = 'Résultat';
   }
 
   /// =============================================================
@@ -88,12 +95,19 @@ export class MethodeComponent implements OnInit {
   /// =============================================================
   AddSac() {
 
+    const find = this.ListeBoite.findIndex(s => s.Capacite === this.capaciteTempo);
+
+    if (this.ListeBoite.length === 0 || find < 0) {
       const addSac = new Boite();
       addSac.ListeObjet = new Array<Objet>();
       addSac.IdBoite = this.ListeBoite.length + 1;
       addSac.Capacite = this.capaciteTempo;
 
       this.ListeBoite.push(addSac);
+
+    } else {
+      alert(`La capacité ${this.capaciteTempo} existe déjà` );
+    }
 
   }
 
@@ -116,16 +130,6 @@ export class MethodeComponent implements OnInit {
     this.ListeBoite.splice( i.valueOf() - 1, 1);
   }
 
-  CalculMethod() {
-
-    const data = new DonneesEnEntree();
-    data.ListeObjet = this.ListeObjet;
-
-    this.service.Calcul(data).subscribe(
-      result => { this.resultat = result; },
-      errors => { alert(JSON.stringify(errors)); }
-    );
-  }
 
   ChangeMenu(changemenu: boolean) {
 
@@ -162,8 +166,25 @@ export class MethodeComponent implements OnInit {
     });
   }
 
-  SelectionneUnFichier() {
-    this.LabelBouton = 'toto';
+
+
+
+
+  selectEvent(file: File): void {
+    this.http.get('assets/bench/' + file.name, {responseType: 'text'})
+        .subscribe(data => console.log(data));
+  }
+
+  ChangementDePage() {
+    if (this.StringPage === 'Résultat') {
+      this.StringPage = 'Entrées';
+      this.PageEntree = false;
+      this.PageSortie = true;
+    } else {
+      this.StringPage = 'Résultat';
+      this.PageEntree = true;
+      this.PageSortie = false;
+    }
   }
 
 }

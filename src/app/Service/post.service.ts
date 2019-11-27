@@ -3,10 +3,12 @@ import { DataMethod } from '../Model/DataMethod';
 import { HttpClient } from '@angular/common/http';
 import { DonneesEnEntree } from '../Model/DonnesEnEntree';
 import { Resultat } from '../Model/Resultat';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class PostService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +22,10 @@ export class PostService {
 
   public Calcul(item: DonneesEnEntree) {
 
-    return this.http.post<Resultat>(`http://localhost:5000/api/methode/Calcul`, item);
+    return this.http.post<Resultat>(`http://localhost:8080/api/methode/Calcul`, item);
   }
+
+
+
 
 }

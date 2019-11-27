@@ -9,20 +9,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostService } from './Service/post.service';
 import { FormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CovalentFileModule, TdFileService, IUploadOptions } from '@covalent/core/file';
+import { ResultatComponent } from './resultat/resultat.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MethodeComponent,
-    MethodeNamePipe
+    MethodeNamePipe,
+    ResultatComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    CovalentFileModule
   ],
   providers: [
-    PostService
+    PostService,
+    TdFileService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,12 @@
+<div *ngIf="this.PageSortie">
+<app-resultat [ListeObjet]="ListeObjet" [ListeBoite]="ListeBoite"></app-resultat>
+
+</div>
+<p *ngIf="ListeObjet.length !== 0">{{ListeObjet[0].Poids}}</p>
+
+<button (click)="ChangementDePage()" class="left-button text-right">{{StringPage}}<i class="fa fa-arrow-right"></i></button>
+
+<div class="page" *ngIf="this.PageEntree">
 <div class="container-toggle">
 
 <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" (click)="ChangeMenu(true)" checked>
@@ -7,54 +16,13 @@
 </div>
 
 <div class="container">
-  
-  <!-- <div class="section">
-    <div class="titre">
-        <H2> Choix de méthode</H2>
-        <select [(ngModel)]="methodSelected">
-            <option *ngFor="let method of Methods">{{method | methodeName}}</option>
-        </select>
-        
-        <div class="row offset-3">
-          <span>
-            <input [(ngModel)]="alpha" type="number" class="balloon" id="galaxy" type="text" placeholder="Alpha" /><label for="Alpha">Alpha</label>
-          </span>
 
-          <span>
-            <input  [(ngModel)]="nbObjet" type="number" class="balloon" id="galaxy" type="text" placeholder="N" /><label for="Nombre_objet">Nombre d'objet</label>
-          </span>
-
-          <span>
-              <input  [(ngModel)]="result.b" type="number" class="balloon" id="galaxy" type="text" placeholder="B" /><label for="Valeur max">Max dans le sac</label>
-            </span>
-        </div>
-        
-    </div>
-  </div> -->
-
-  <!-- <div class="section">
-      <button type="button" class="btn btn-primary" (click)="CalculMethod()">
-          Simuler
-        </button>
-
-        <span><label>Temps d'éxecution :</label><p>{{result.timer}}</p></span>
-        <span><label>Cout :</label><p>{{result.cout}}</p></span>
-        <span><label>Borne inférieur :</label><p>{{result.bi}}</p></span>
-        <span><label>Borner supérieur :</label><p>{{result.bs}}</p></span>
-        <span *ngIf="result.result" ><label>Liste solution :</label>
-          <ul>
-            <li   *ngFor="let item of result.result;">N° d'objet{{item}}</li>
-          </ul> 
-        </span>
-
-  </div> -->
-
-
- 
   <div class="row" *ngIf="ModeManuelle">
       
       <div class="section col-5">
-        <h2>Ajout Objet</h2>
+          <div class="titre">
+            <h2>Ajout Objet</h2>
+        </div>
       <span>
         <input  [(ngModel)]="poidsTempo" type="number" class="balloon" id="galaxy" type="text" placeholder="Poids" /><label for="Valeur max">Poids objet</label>
       </span>
@@ -66,7 +34,9 @@
     </div>
   
     <div class="section col-5">
-        <h2>Ajout Sacs</h2>
+        <div class="titre">
+          <h2>Ajout Sacs</h2>
+        </div>
       <span>
         <input  [(ngModel)]="capaciteTempo" type="number" class="balloon" id="galaxy" type="text" placeholder="Capacite" /><label for="Valeur max">Capacité du sac</label>
       </span>
@@ -78,8 +48,23 @@
 
   <div class="row" *ngIf="!ModeManuelle">
     <div class="section col-11">
+        <div class="titre">
         <h2>Choix Fichier</h2>
-        <button (click)="SelectionneUnFichier()" class="btn btn-dark">{{LabelBouton}}</button>
+        </div>
+
+        <div style="margin:0px;">
+            <td-file-upload #singleFileUpload [(ngModel)]="files" (select)="selectEvent($event)"  required>
+                <span>{{ singleFileUpload.value?.name }}</span>
+                <ng-template td-file-input-label>
+        
+                  <span>
+                    Choisir un fichier
+                    <span [hidden]="!singleFileUpload?.required">*</span></span>
+                </ng-template>
+              </td-file-upload>
+        </div>
+        
+  
     </div>
   </div>
 
@@ -107,8 +92,8 @@
             </tbody>
           </table>
         
-      </div>
     </div>
+        </div>
       <div class="section col-5">
           <div class="titre">
               <H2> Tableau des sacs</H2>
@@ -134,4 +119,8 @@
     </div>
 
 </div>
+
+</div>
+
+
 

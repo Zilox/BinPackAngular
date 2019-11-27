@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+      <div class="section col-12" style="margin-top: 0px;" >
+          <div class="titre-blue">
+              <H2> Choix de méthode</H2>
+          </div>
+              <select [(ngModel)]="methodSelected">
+                  <option *ngFor="let method of Methods">{{method | methodeName}}</option>
+              </select>
+              
+              <button type="button" class="btn btn-primary" (click)="CalculMethod()">
+                Simuler
+              </button>
+              
+          
+        </div>
+  </div>
+
+  <div class="row">
+
+      <div class="section col-11" style="margin-top: 0px;" >
+          <div class="titre-blue">
+              <H2> Résultat trouvé</H2>
+          </div>
+             <div>
+               <label><strong>Temps execution:</strong> </label>
+               <p>{{resultat.TpsExec}}</p>
+             </div>
+
+             <div>
+                <label><strong>Poids Vide:</strong> </label>
+                <p>{{resultat.TpsExec}}</p>
+            </div>
+
+             <div class="table-responsive table-striped">
+              <table class="table">
+                <thead>
+                  <th>Numéro d'objet</th>
+                  <th>Capacité du sac  </th>
+                  <th>Liste objet</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let result of resultat.ListeBoite">
+                    <td>{{result.IdBoite}}</td>
+                    <td>{{result.Capacite}}</td>
+                    <td > 
+                        <ul  class="Objet" *ngFor="let objet of result.ListeObjet">
+                            <li><strong>Id:</strong>{{objet.IdObjet}}</li>
+                            <li><strong>Couleur:</strong>{{objet.Couleur}}</li>
+                            <li><Strong>Poids:</Strong>{{objet.IdObjet}}</li>
+                        </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          
+        </div>
+  </div>
+
+
+</div>
